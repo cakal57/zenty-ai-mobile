@@ -1,0 +1,53 @@
+{
+  "name": "ZENTY-AI Trading Platform",
+  "short_name": "ZENTY-AI",
+  "description": "AI-Powered Crypto & Stock Trading Platform",
+  "start_url": "/zenty-ai-mobile/",
+  "display": "standalone",
+  "background_color": "#0B0C10",
+  "theme_color": "#00FFFF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://ui-avatars.com/api/?name=ZENTY+AI&background=00FFFF&color=000&size=192&bold=true&font-size=0.5",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://ui-avatars.com/api/?name=ZENTY+AI&background=00FFFF&color=000&size=512&bold=true&font-size=0.5",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity", "business"],
+  "shortcuts": [
+    {
+      "name": "AI Alarmlar",
+      "short_name": "Alarmlar",
+      "description": "TradingView AI Alarmlarını Gör",
+      "url": "/zenty-ai-mobile/#ai-alerts",
+      "icons": [
+        {
+          "src": "https://ui-avatars.com/api/?name=AI&background=00FF66&color=000&size=96&bold=true",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Whale Alert",
+      "short_name": "Whale",
+      "description": "Büyük Transferleri İzle",
+      "url": "/zenty-ai-mobile/#whale",
+      "icons": [
+        {
+          "src": "https://ui-avatars.com/api/?name=W&background=00D4FF&color=000&size=96&bold=true",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
+
+
