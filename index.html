@@ -17,6 +17,9 @@
     <meta name="apple-mobile-web-app-title" content="ZENTY-AI">
     <meta name="theme-color" content="#00FFFF">
     
+    <!-- Apple Touch Icon (Logo için) -->
+    <link rel="apple-touch-icon" href="logo-192.png">
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
@@ -37,6 +40,7 @@
             --gold: #FFD700;
             --text: #C5C6C7;
             --text-dim: #8892A6;
+            --purple: #9d4edd;
         }
         
         body {
@@ -45,11 +49,11 @@
             color: var(--text);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 80px; /* Bottom nav için */
+            padding-bottom: 80px;
         }
         
         /* ═══════════════════════════════════════════════════════════
-           📱 HEADER (Mobil-Optimized)
+           📱 HEADER
         ═══════════════════════════════════════════════════════════ */
         .header {
             background: linear-gradient(135deg, #1F2833 0%, #0B0C10 100%);
@@ -103,7 +107,6 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
         
-        /* Coin Selector */
         .coin-selector {
             display: flex;
             align-items: center;
@@ -153,12 +156,26 @@
         }
         
         /* ═══════════════════════════════════════════════════════════
-           🎯 MAIN SIGNAL CARD (Big & Bold!)
+           📄 PAGES (Sinyaller, Piyasalar, AI, Ayarlar)
         ═══════════════════════════════════════════════════════════ */
-        .main-content {
+        .page {
+            display: none;
             padding: 20px;
+            animation: fadeIn 0.3s;
         }
         
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════
+           🎯 SIGNAL CARD
+        ═══════════════════════════════════════════════════════════ */
         .signal-card {
             background: linear-gradient(135deg, var(--bg-card) 0%, rgba(31,40,51,0.5) 100%);
             border-radius: 20px;
@@ -166,7 +183,6 @@
             margin-bottom: 20px;
             border: 2px solid;
             box-shadow: 0 10px 40px;
-            animation: fadeIn 0.5s;
         }
         
         .signal-card.long {
@@ -182,11 +198,6 @@
         .signal-card.wait {
             border-color: var(--gold);
             box-shadow: 0 10px 40px rgba(255,215,0,0.3);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .signal-header {
@@ -231,7 +242,6 @@
             background: rgba(255,255,255,0.1);
             border-radius: 10px;
             overflow: hidden;
-            position: relative;
         }
         
         .confidence-fill {
@@ -241,12 +251,6 @@
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
         }
         
-        .confidence-diamonds {
-            color: var(--gold);
-            font-size: 18px;
-        }
-        
-        /* Signal Details Grid */
         .signal-details {
             display: grid;
             gap: 12px;
@@ -285,7 +289,7 @@
         .detail-value.gold { color: var(--gold); }
         
         /* ═══════════════════════════════════════════════════════════
-           🤖 AI ANALYSIS BUTTON
+           🤖 AI ANALYSIS
         ═══════════════════════════════════════════════════════════ */
         .ai-analyze-btn {
             width: 100%;
@@ -308,7 +312,6 @@
         
         .ai-analyze-btn:active {
             transform: scale(0.98);
-            box-shadow: 0 4px 20px rgba(124,58,237,0.3);
         }
         
         .ai-analyze-btn.loading {
@@ -316,7 +319,7 @@
             cursor: not-allowed;
         }
         
-        .ai-analyze-btn .spinner {
+        .spinner {
             width: 20px;
             height: 20px;
             border: 3px solid rgba(255,255,255,0.3);
@@ -329,7 +332,6 @@
             to { transform: rotate(360deg); }
         }
         
-        /* AI Analysis Result */
         .ai-result {
             background: rgba(124,58,237,0.1);
             border: 2px solid #a855f7;
@@ -341,7 +343,6 @@
         
         .ai-result.show {
             display: block;
-            animation: fadeIn 0.5s;
         }
         
         .ai-result-header {
@@ -361,7 +362,182 @@
         }
         
         /* ═══════════════════════════════════════════════════════════
-           📋 AI ALERTS HISTORY
+           📊 MARKETS (Piyasalar)
+        ═══════════════════════════════════════════════════════════ */
+        .markets-grid {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .market-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            border-left: 4px solid var(--neon-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .market-card:active {
+            transform: scale(0.98);
+            background: rgba(31,40,51,0.8);
+        }
+        
+        .market-info {
+            flex: 1;
+        }
+        
+        .market-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        
+        .market-symbol {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .market-stats {
+            text-align: right;
+        }
+        
+        .market-price {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            margin-bottom: 4px;
+        }
+        
+        .market-change {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        
+        .market-change.up {
+            color: var(--neon-green);
+            background: rgba(0,255,102,0.1);
+        }
+        
+        .market-change.down {
+            color: var(--neon-pink);
+            background: rgba(255,0,102,0.1);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════
+           ⚙️ SETTINGS
+        ═══════════════════════════════════════════════════════════ */
+        .settings-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .settings-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .settings-item {
+            margin-bottom: 16px;
+        }
+        
+        .settings-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .settings-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(0,255,255,0.2);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .settings-input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+        }
+        
+        .settings-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .settings-toggle:active {
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .toggle-switch {
+            width: 50px;
+            height: 28px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 14px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .toggle-switch.active {
+            background: var(--neon-green);
+        }
+        
+        .toggle-knob {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+        
+        .toggle-switch.active .toggle-knob {
+            left: 24px;
+        }
+        
+        .settings-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+            color: #000;
+            font-size: 16px;
+            font-weight: 900;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .settings-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════
+           📋 ALERTS HISTORY
         ═══════════════════════════════════════════════════════════ */
         .section-header {
             display: flex;
@@ -549,36 +725,14 @@
         }
         
         /* ═══════════════════════════════════════════════════════════
-           📱 RESPONSIVE (Tablet & Desktop)
-        ═══════════════════════════════════════════════════════════ */
-        @media (min-width: 768px) {
-            .main-content {
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            
-            .signal-details {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        /* ═══════════════════════════════════════════════════════════
            🎨 UTILITIES
         ═══════════════════════════════════════════════════════════ */
         .hidden {
             display: none !important;
         }
         
-        .text-center {
-            text-align: center;
-        }
-        
         .mt-20 {
             margin-top: 20px;
-        }
-        
-        .mb-20 {
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -613,26 +767,22 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════════
-     🎯 MAIN CONTENT
+     📄 PAGE 1: SİNYALLER
 ═══════════════════════════════════════════════════════════════════════════════ -->
-<div class="main-content">
+<div class="page active" id="page-signals">
     
-    <!-- Last Signal from Firebase -->
+    <!-- Last Signal -->
     <div class="signal-card wait" id="mainSignalCard">
         <div class="signal-header">
-            <div class="signal-type wait" id="signalType">
-                ⏸ WAIT
-            </div>
-            <div class="signal-time" id="signalTime">
-                Bekleniyor...
-            </div>
+            <div class="signal-type wait" id="signalType">⏸ WAIT</div>
+            <div class="signal-time" id="signalTime">Bekleniyor...</div>
         </div>
         
         <div class="confidence-bar">
             <div class="confidence-label">
                 <span>Güven Skoru</span>
                 <span id="confidenceText">
-                    <span class="confidence-diamonds" id="confidenceDiamonds">-</span>
+                    <span style="color: var(--gold);" id="confidenceDiamonds">-</span>
                     <strong id="confidenceValue">-</strong>
                 </span>
             </div>
@@ -674,15 +824,11 @@
     
     <!-- AI Result -->
     <div class="ai-result" id="aiResult">
-        <div class="ai-result-header">
-            🤖 Yapay Zeka Analizi
-        </div>
-        <div class="ai-result-text" id="aiResultText">
-            Analiz sonucu burada görünecek...
-        </div>
+        <div class="ai-result-header">🤖 Yapay Zeka Analizi</div>
+        <div class="ai-result-text" id="aiResultText"></div>
     </div>
     
-    <!-- AI Alerts History -->
+    <!-- Alerts History -->
     <div class="section-header">
         <div class="section-title">
             📋 AI Alarmlar
@@ -700,29 +846,139 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════════
+     📄 PAGE 2: PİYASALAR
+═══════════════════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-markets">
+    <div class="section-header">
+        <div class="section-title">📊 Kripto Piyasaları</div>
+    </div>
+    
+    <div class="markets-grid" id="marketsGrid">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Piyasalar yükleniyor...</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════
+     📄 PAGE 3: YAPAY ZEKA
+═══════════════════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-ai">
+    <div class="section-header">
+        <div class="section-title">🤖 Yapay Zeka Analizi</div>
+    </div>
+    
+    <div class="ai-result show">
+        <div class="ai-result-header">💡 AI Asistan</div>
+        <div class="ai-result-text">
+            <strong>Merhaba! 👋</strong><br><br>
+            Ben ZENTY-AI, senin kişisel trading asistanınım. TradingView'dan gelen sinyalleri analiz ediyor ve sana en iyi tavsiyeleri veriyorum.<br><br>
+            <strong>Neler yapabilirim?</strong><br>
+            • 🎯 Sinyalleri detaylı analiz ederim<br>
+            • 📊 Piyasa koşullarını değerlendiririm<br>
+            • 💎 Giriş/hedef/stop-loss seviyeleri veririm<br>
+            • ⚠️ Risk yönetimi önerilerim<br>
+            • 🚀 En iyi giriş zamanını söylerim<br><br>
+            Yeni bir sinyal geldiğinde "AI Analiz Yap" butonuna bas, ben hemen analize başlayacağım! 🤖✨
+        </div>
+    </div>
+    
+    <button class="ai-analyze-btn" onclick="analyzeWithAI()">
+        <span>🤖 SON SİNYALİ ANALİZ ET</span>
+    </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════
+     📄 PAGE 4: AYARLAR
+═══════════════════════════════════════════════════════════════════════════════ -->
+<div class="page" id="page-settings">
+    <div class="section-header">
+        <div class="section-title">⚙️ Ayarlar</div>
+    </div>
+    
+    <!-- API Settings -->
+    <div class="settings-section">
+        <div class="settings-title">🔑 API Ayarları</div>
+        
+        <div class="settings-item">
+            <label class="settings-label">Groq API Key</label>
+            <input type="text" class="settings-input" id="apiKeyInput" placeholder="gsk_..." value="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">
+        </div>
+        
+        <button class="settings-btn" onclick="saveApiKey()">
+            💾 API Key Kaydet
+        </button>
+    </div>
+    
+    <!-- Notification Settings -->
+    <div class="settings-section">
+        <div class="settings-title">🔔 Bildirim Ayarları</div>
+        
+        <div class="settings-toggle" onclick="toggleNotifications()">
+            <span class="settings-label" style="margin: 0;">Push Bildirimleri</span>
+            <div class="toggle-switch active" id="notifToggle">
+                <div class="toggle-knob"></div>
+            </div>
+        </div>
+        
+        <div class="settings-toggle" onclick="toggleSound()">
+            <span class="settings-label" style="margin: 0;">Ses Uyarısı</span>
+            <div class="toggle-switch active" id="soundToggle">
+                <div class="toggle-knob"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- App Info -->
+    <div class="settings-section">
+        <div class="settings-title">ℹ️ Uygulama Bilgisi</div>
+        
+        <div class="detail-row cyan">
+            <span class="detail-label">Versiyon</span>
+            <span class="detail-value cyan">v2.0 Mobile</span>
+        </div>
+        
+        <div class="detail-row green">
+            <span class="detail-label">Firebase</span>
+            <span class="detail-value green" id="firebaseStatus">Bağlı ✅</span>
+        </div>
+        
+        <div class="detail-row gold">
+            <span class="detail-label">PWA</span>
+            <span class="detail-value gold">Aktif 📱</span>
+        </div>
+    </div>
+    
+    <button class="settings-btn" onclick="clearCache()">
+        🗑️ Önbelleği Temizle
+    </button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════
      📱 BOTTOM NAVIGATION
 ═══════════════════════════════════════════════════════════════════════════════ -->
 <div class="bottom-nav">
-    <div class="nav-item active" onclick="showTab('signals')">
+    <div class="nav-item active" data-page="signals">
         <div class="nav-icon">🎯</div>
         <div class="nav-label">Sinyaller</div>
     </div>
-    <div class="nav-item" onclick="showTab('analysis')">
+    <div class="nav-item" data-page="markets">
+        <div class="nav-icon">📊</div>
+        <div class="nav-label">Piyasalar</div>
+    </div>
+    <div class="nav-item" data-page="ai">
         <div class="nav-icon">🤖</div>
-        <div class="nav-label">AI Analiz</div>
+        <div class="nav-label">AI</div>
     </div>
-    <div class="nav-item" onclick="showTab('alerts')">
-        <div class="nav-icon">📋</div>
-        <div class="nav-label">Geçmiş</div>
-    </div>
-    <div class="nav-item" onclick="showTab('settings')">
+    <div class="nav-item" data-page="settings">
         <div class="nav-icon">⚙️</div>
         <div class="nav-label">Ayarlar</div>
     </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════════
-     🔥 JAVASCRIPT - FIREBASE + AI + PWA
+     🔥 JAVASCRIPT
 ═══════════════════════════════════════════════════════════════════════════════ -->
 <script>
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -740,14 +996,15 @@ const firebaseConfig = {
     measurementId: "G-NGQNMBKQ2Q"
 };
 
-// Initialize Firebase
 let firebaseInitialized = false;
 try {
     firebase.initializeApp(firebaseConfig);
     firebaseInitialized = true;
-    console.log('✅ Firebase initialized successfully!');
+    console.log('✅ Firebase initialized!');
+    document.getElementById('firebaseStatus').textContent = 'Bağlı ✅';
 } catch (error) {
-    console.error('❌ Firebase initialization error:', error);
+    console.error('❌ Firebase error:', error);
+    document.getElementById('firebaseStatus').textContent = 'Hata ❌';
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -758,67 +1015,82 @@ let currentCoin = 'BTC';
 let lastSignal = null;
 let alertsHistory = [];
 let isAnalyzing = false;
+let groqApiKey = localStorage.getItem('groqApiKey') || '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';
+let notificationsEnabled = localStorage.getItem('notifications') !== 'false';
+let soundEnabled = localStorage.getItem('sound') !== 'false';
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 🎯 MAIN SIGNAL UPDATE
+// 📱 NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const pageName = this.getAttribute('data-page');
+        
+        // Update active nav item
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Show page
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(`page-${pageName}`).classList.add('active');
+        
+        // Load page data
+        if (pageName === 'markets' && document.getElementById('marketsGrid').children[0].classList.contains('loading-state')) {
+            loadMarkets();
+        }
+    });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎯 SIGNAL MANAGEMENT
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function updateMainSignal(signal) {
     if (!signal) return;
     
     lastSignal = signal;
-    
-    // Hide empty state
     document.getElementById('noSignalState').classList.add('hidden');
     
-    // Update signal card style
     const card = document.getElementById('mainSignalCard');
     card.className = 'signal-card ' + signal.signal.toLowerCase();
     
-    // Update signal type
     const signalType = document.getElementById('signalType');
-    const signalEmoji = signal.signal === 'LONG' ? '🟢' : signal.signal === 'SHORT' ? '🔴' : '⏸';
-    signalType.innerHTML = `${signalEmoji} ${signal.signal}`;
+    const emoji = signal.signal === 'LONG' ? '🟢' : signal.signal === 'SHORT' ? '🔴' : '⏸';
+    signalType.innerHTML = `${emoji} ${signal.signal}`;
     signalType.className = 'signal-type ' + signal.signal.toLowerCase();
     
-    // Update time
-    const signalTime = document.getElementById('signalTime');
-    const timeAgo = getTimeAgo(signal.timestamp);
-    signalTime.textContent = timeAgo;
+    document.getElementById('signalTime').textContent = getTimeAgo(signal.timestamp);
     
-    // Update confidence
     const confidence = signal.confluenceScore || 0;
     document.getElementById('confidenceValue').textContent = confidence + '%';
     document.getElementById('confidenceFill').style.width = confidence + '%';
     
-    // Diamonds based on confidence
     let diamonds = '';
     if (confidence >= 85) diamonds = '💎💎💎';
     else if (confidence >= 70) diamonds = '💎💎';
     else if (confidence >= 50) diamonds = '💎';
     document.getElementById('confidenceDiamonds').textContent = diamonds;
     
-    // Update details
     document.getElementById('detailSymbol').textContent = signal.symbol || 'N/A';
     document.getElementById('detailPrice').textContent = signal.price ? '$' + signal.price.toLocaleString() : 'N/A';
     document.getElementById('detailConfluence').textContent = (signal.confluenceScore || 0) + '/100';
     document.getElementById('detailInterval').textContent = signal.interval || '1H';
     
-    // Show notification
-    if ('Notification' in window && Notification.permission === 'granted') {
+    if (notificationsEnabled && 'Notification' in window && Notification.permission === 'granted') {
         new Notification('🤖 Yeni Trading Sinyali!', {
             body: `${signal.symbol}: ${signal.signal} @ $${signal.price}`,
-            icon: 'https://ui-avatars.com/api/?name=ZENTY+AI&background=00FFFF&color=000&size=192&bold=true&font-size=0.5',
-            badge: 'https://ui-avatars.com/api/?name=Z&background=00FFFF&color=000&size=96&bold=true'
+            icon: 'logo-192.png',
+            badge: 'logo-192.png'
         });
     }
     
-    console.log('✅ Main signal updated:', signal);
+    if (soundEnabled) {
+        playNotificationSound();
+    }
+    
+    console.log('✅ Signal updated:', signal);
 }
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// 📋 ALERTS HISTORY
-// ═══════════════════════════════════════════════════════════════════════════════
 
 function updateAlertsHistory(signals) {
     const alertsList = document.getElementById('alertsList');
@@ -829,7 +1101,6 @@ function updateAlertsHistory(signals) {
             <div class="empty-state">
                 <div class="empty-icon">📭</div>
                 <div class="empty-text">Henüz Alarm Yok</div>
-                <div class="empty-subtext">Gelen alarmlar burada listelenecek</div>
             </div>
         `;
         alertsCount.textContent = '0';
@@ -844,7 +1115,7 @@ function updateAlertsHistory(signals) {
             <div class="alert-info">
                 <div class="alert-symbol">${signal.symbol || 'N/A'}</div>
                 <div class="alert-signal ${signal.signal.toLowerCase()}">
-                    ${signal.signal === 'LONG' ? '🟢' : signal.signal === 'SHORT' ? '🔴' : '⏸'} ${signal.signal}
+                    ${signal.signal === 'LONG' ? '🟢' : '🔴'} ${signal.signal}
                 </div>
                 <div class="alert-time">${getTimeAgo(signal.timestamp)}</div>
             </div>
@@ -854,8 +1125,6 @@ function updateAlertsHistory(signals) {
             </div>
         </div>
     `).join('');
-    
-    console.log(`✅ Alerts history updated: ${signals.length} signals`);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -866,47 +1135,32 @@ if (firebaseInitialized) {
     const db = firebase.database();
     const signalsRef = db.ref('webhook-signals');
     
-    // Listen for new signals
     signalsRef.orderByChild('timestamp').limitToLast(1).on('child_added', (snapshot) => {
         const signal = snapshot.val();
-        console.log('🔥 New signal from Firebase:', signal);
+        console.log('🔥 New signal:', signal);
         updateMainSignal(signal);
     });
     
-    // Load history (last 20 signals)
     signalsRef.orderByChild('timestamp').limitToLast(20).once('value', (snapshot) => {
         const signals = [];
         snapshot.forEach((childSnapshot) => {
-            signals.unshift(childSnapshot.val()); // Newest first
+            signals.unshift(childSnapshot.val());
         });
         updateAlertsHistory(signals);
-        
-        // Update main signal with latest
         if (signals.length > 0) {
             updateMainSignal(signals[0]);
         }
     });
-    
-    console.log('✅ Firebase real-time listener active!');
-} else {
-    console.warn('⚠️ Firebase not initialized - signals will not update');
-    document.getElementById('alertsList').innerHTML = `
-        <div class="empty-state">
-            <div class="empty-icon">⚠️</div>
-            <div class="empty-text">Firebase Bağlantı Hatası</div>
-            <div class="empty-subtext">Lütfen internet bağlantınızı kontrol edin</div>
-        </div>
-    `;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 🤖 AI ANALYSIS (Groq API)
+// 🤖 AI ANALYSIS
 // ═══════════════════════════════════════════════════════════════════════════════
 
 async function analyzeWithAI() {
     if (isAnalyzing) return;
     if (!lastSignal) {
-        alert('⚠️ Henüz bir sinyal gelmedi! Analiz yapmak için TradingView\'dan alarm bekleyin.');
+        alert('⚠️ Henüz sinyal gelmedi! TradingView alarm bekleyin.');
         return;
     }
     
@@ -916,19 +1170,16 @@ async function analyzeWithAI() {
     const aiResult = document.getElementById('aiResult');
     const aiResultText = document.getElementById('aiResultText');
     
-    // Update button to loading state
     btn.classList.add('loading');
     btnText.innerHTML = '<div class="spinner"></div> ANALİZ EDİLİYOR...';
     btn.disabled = true;
-    
-    // Hide previous result
     aiResult.classList.remove('show');
     
     try {
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer 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',
+                'Authorization': `Bearer ${groqApiKey}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -966,17 +1217,16 @@ Cevabını profesyonel ama anlaşılır bir dille yaz. Emoji kullan ve net tavsi
         const data = await response.json();
         const analysis = data.choices[0].message.content;
         
-        // Show result
         aiResultText.innerHTML = analysis.replace(/\n/g, '<br>');
         aiResult.classList.add('show');
         
         console.log('✅ AI analysis completed');
         
     } catch (error) {
-        console.error('❌ AI analysis error:', error);
+        console.error('❌ AI error:', error);
         aiResultText.innerHTML = `
             ⚠️ <strong>Analiz Hatası</strong><br>
-            Yapay zeka analizi yapılırken bir hata oluştu. Lütfen tekrar deneyin.<br>
+            Yapay zeka analizi yapılırken bir hata oluştu. Lütfen API key'inizi kontrol edin.<br>
             <small>Hata: ${error.message}</small>
         `;
         aiResult.classList.add('show');
@@ -989,7 +1239,47 @@ Cevabını profesyonel ama anlaşılır bir dille yaz. Emoji kullan ve net tavsi
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 💰 COIN PRICE UPDATE (CoinGecko API)
+// 📊 MARKETS (CoinGecko API)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+async function loadMarkets() {
+    const marketsGrid = document.getElementById('marketsGrid');
+    
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false');
+        const markets = await response.json();
+        
+        marketsGrid.innerHTML = markets.map(coin => `
+            <div class="market-card">
+                <div class="market-info">
+                    <div class="market-name">${coin.name}</div>
+                    <div class="market-symbol">${coin.symbol.toUpperCase()}</div>
+                </div>
+                <div class="market-stats">
+                    <div class="market-price">$${coin.current_price.toLocaleString()}</div>
+                    <div class="market-change ${coin.price_change_percentage_24h >= 0 ? 'up' : 'down'}">
+                        ${coin.price_change_percentage_24h >= 0 ? '+' : ''}${coin.price_change_percentage_24h.toFixed(2)}%
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        console.log('✅ Markets loaded');
+        
+    } catch (error) {
+        console.error('❌ Markets error:', error);
+        marketsGrid.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">⚠️</div>
+                <div class="empty-text">Piyasalar Yüklenemedi</div>
+                <div class="empty-subtext">Lütfen internet bağlantınızı kontrol edin</div>
+            </div>
+        `;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 💰 COIN PRICE UPDATE
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const coinIds = {
@@ -1028,28 +1318,77 @@ function changeCoin() {
     updateCoinPrice();
 }
 
-// Update price every 30 seconds
 updateCoinPrice();
 setInterval(updateCoinPrice, 30000);
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 📱 NAVIGATION
+// ⚙️ SETTINGS
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function showTab(tabName) {
-    // Update active state
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => item.classList.remove('active'));
-    event.currentTarget.classList.add('active');
-    
-    // Tab actions
-    if (tabName === 'analysis') {
-        analyzeWithAI();
-    } else if (tabName === 'settings') {
-        alert('⚙️ Ayarlar yakında eklenecek!');
+function saveApiKey() {
+    const apiKey = document.getElementById('apiKeyInput').value.trim();
+    if (!apiKey) {
+        alert('⚠️ Lütfen geçerli bir API key girin!');
+        return;
     }
+    localStorage.setItem('groqApiKey', apiKey);
+    groqApiKey = apiKey;
+    alert('✅ API Key kaydedildi!');
+}
+
+function toggleNotifications() {
+    const toggle = document.getElementById('notifToggle');
+    notificationsEnabled = !notificationsEnabled;
+    localStorage.setItem('notifications', notificationsEnabled);
+    toggle.classList.toggle('active');
     
-    console.log('📱 Tab changed to:', tabName);
+    if (notificationsEnabled && 'Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+            console.log('🔔 Notification permission:', permission);
+        });
+    }
+}
+
+function toggleSound() {
+    const toggle = document.getElementById('soundToggle');
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('sound', soundEnabled);
+    toggle.classList.toggle('active');
+}
+
+function clearCache() {
+    if (confirm('Önbelleği temizlemek istediğinizden emin misiniz?')) {
+        localStorage.clear();
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                names.forEach(name => caches.delete(name));
+            });
+        }
+        alert('✅ Önbellek temizlendi! Sayfa yeniden yüklenecek.');
+        location.reload();
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🔊 NOTIFICATION SOUND
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function playNotificationSound() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 800;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1075,29 +1414,23 @@ function getTimeAgo(timestamp) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 📱 PWA SERVICE WORKER REGISTRATION
+// 📱 PWA
 // ═══════════════════════════════════════════════════════════════════════════════
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-            .then(registration => {
-                console.log('✅ PWA Service Worker registered!', registration);
-            })
-            .catch(error => {
-                console.log('⚠️ Service Worker registration failed:', error);
-            });
+            .then(reg => console.log('✅ Service Worker registered!', reg))
+            .catch(err => console.log('⚠️ Service Worker failed:', err));
     });
 }
 
-// PWA Install Prompt
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.log('📱 PWA install prompt ready!');
+    console.log('📱 PWA install ready!');
     
-    // Show install banner
     const installBanner = document.createElement('div');
     installBanner.style.cssText = `
         position: fixed;
@@ -1118,31 +1451,32 @@ window.addEventListener('beforeinstallprompt', (e) => {
     `;
     installBanner.innerHTML = `
         📱 <strong>ZENTY-AI YÜKLE!</strong><br>
-        <span style="font-size:13px;font-weight:400">Ana ekrana ekle ve daha hızlı kullan!</span>
+        <span style="font-size:13px;font-weight:400">Ana ekrana ekle!</span>
     `;
     installBanner.onclick = () => {
         deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('✅ User installed PWA!');
+        deferredPrompt.userChoice.then((result) => {
+            if (result.outcome === 'accepted') {
+                console.log('✅ PWA installed!');
             }
             deferredPrompt = null;
             installBanner.remove();
         });
     };
     document.body.appendChild(installBanner);
-    
     setTimeout(() => installBanner.remove(), 10000);
 });
 
-// Request notification permission
 if ('Notification' in window && Notification.permission === 'default') {
-    Notification.requestPermission().then(permission => {
-        console.log('🔔 Notification permission:', permission);
-    });
+    Notification.requestPermission().then(p => console.log('🔔 Notification permission:', p));
 }
 
-console.log('🚀 ZENTY-AI Mobile Platform loaded! Firebase + PWA + AI active!');
+// Load settings from localStorage
+document.getElementById('apiKeyInput').value = groqApiKey;
+if (!notificationsEnabled) document.getElementById('notifToggle').classList.remove('active');
+if (!soundEnabled) document.getElementById('soundToggle').classList.remove('active');
+
+console.log('🚀 ZENTY-AI Mobile Platform v2.0 loaded! 📱✨');
 </script>
 
 </body>
